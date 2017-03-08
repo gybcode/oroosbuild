@@ -1,0 +1,94 @@
+<div flex layout-fill layout-align="center center" layout="column">
+  <h1><span md-colors="{color:'accent-500'}">{{vm.questions[vm.q-1].title}}</span><span class="grey"> kérdés</span></h1>
+  <div style="max-width:600px;font-size:.8em;" ng-show="vm.q < 7">
+    <h2> {{vm.aid[0]}} </h2>
+  </div>
+  <div style="max-width:600px;font-size:.8em;" ng-show="vm.q < 25 && vm.q > 6 && vm.questions[vm.q-1].title.indexOf('A') == -1 && vm.questions[vm.q-1].title.indexOf('B') == -1">
+    <h2> {{vm.aid[1]}} </h2>
+  </div>
+  <div style="max-width:600px;font-size:.8em;" ng-show="vm.q < 25 && vm.q > 6 && vm.questions[vm.q-1].title.indexOf('A') > -1">
+    <h2> {{vm.aid[2]}} </h2>
+  </div>
+  <div style="max-width:600px;font-size:.8em;" ng-show="vm.q < 25 && vm.q > 6 && vm.questions[vm.q-1].title.indexOf('B') > -1">
+    <h2> {{vm.aid[3]}} </h2>
+  </div>
+  <md-progress-linear ng-hide="vm.q>19" style="height:20px;max-width: 800px;" class="md-accent md-hue-2" md-mode="determinate"
+    value="{{vm.q/19*100}}"></md-progress-linear>
+  <!-- FIRST 6 -->
+  <div layout layout-xs="column" style="max-width:800px" ng-hide="vm.q > 6">
+    <div flex-xs="100" flex="30" layout layout-align="center center" style="text-align: right">
+      <span class="md-body-1">{{vm.questions[vm.q-1].left}}</span>
+    </div>
+    <md-slide-container layout="column" layout-padding="5" flex-xs="100" flex="40" layout-align="center center">
+      <!--<md-input-container><input type="input" style="text-align:center;font-size:28px;max-width: 20px;border-bottom:0;" readonly ng-model="vm.rating3" aria-label="Rating"
+          aria-controls="rate"></md-input-container>-->
+      <md-slider style="width:90%" flex id="rate" class="md-accent md-hue-2" md-discrete ng-model="vm.rating" step="1" min="1"
+        max="6" aria-label="rating"></md-slider>
+    </md-slide-container>
+    <div flex="30" flex-xs="100" layout layout-align="center center" style="text-align: left">
+      <span class="md-body-1">{{vm.questions[vm.q-1].right}}</span>
+    </div>
+  </div>
+  <!-- LAST 6 -->
+  <md-content layout layout-xs="column" style="max-width: 600px" ng-show="vm.q > 6">
+    <div ng-hide="vm.questions[vm.q-1].title.indexOf('A') > -1 || vm.questions[vm.q-1].title.indexOf('B') > -1" layout>
+      <div flex-xs="100" flex="70" layout layout-align="center center" style="text-align: center; font-size: 1.2em;">
+        <h2>{{vm.questions[vm.q-1].question}}</h2>
+      </div>
+      <div flex-xs="100" flex layout="column" layout-align="center center">
+        <md-radio-group ng-model="vm.rating" style="font-size: .8em;margin-top: 20px;">
+          <md-radio-button value="1" class="md-accent md-hue-2">1 Egyáltalán nem</md-radio-button>
+          <md-radio-button value="2" class="md-accent md-hue-2">2 Nem</md-radio-button>
+          <md-radio-button value="3" class="md-accent md-hue-2">3 Közepesen</md-radio-button>
+          <md-radio-button value="4" class="md-accent md-hue-2">4 Nagyjából igen</md-radio-button>
+          <md-radio-button value="5" class="md-accent md-hue-2">5 teljes mértékben</md-radio-button>
+        </md-radio-group>
+      </div>
+    </div>
+    <div ng-show="vm.questions[vm.q-1].title.indexOf('A') > -1" layout="column">
+      <div flex layout layout-align="center center" style="text-align: center; font-size: 1.2em;">
+        <h2>{{vm.questions[vm.q-1].question}}</h2>
+      </div>
+      <div layout="column">
+        <div layout layout-align="center center" ng-repeat="a in vm.questions[vm.q-1].questions track by $index" style="border-bottom:1px solid #eee;">
+          <span flex="60" class="md-body-1">{{a}}</span>
+          <span flex="10"></span>
+          <md-input-container flex="30">
+            <md-select aria-label="Válassz{{$index}}" ng-model="vm.rating[0][$index]">
+              <md-option value="1">1 - Egyáltalán nem fontos</md-option>
+              <md-option value="2">2 - Nem fontos</md-option>
+              <md-option value="3">3 - Közepesen fontos</md-option>
+              <md-option value="4">4 - Eléggé fontos</md-option>
+              <md-option value="5">5 - Nagyon fontos</md-option>
+            </md-select>
+          </md-input-container>
+        </div>
+      </div>
+    </div>
+    <div ng-show="vm.questions[vm.q-1].title.indexOf('B') > -1" layout="column">
+      <div flex layout layout-align="center center" style="text-align: center; font-size: 1.2em;">
+        <h2>{{vm.questions[vm.q-1].question}}</h2>
+      </div>
+      <div layout="column">
+        <div layout layout-align="center center" ng-repeat="a in vm.questions[vm.q-1].questions track by $index" style="border-bottom: 1px solid #eee;">
+          <span flex="60" class="md-body-1">{{a}}</span>
+          <span flex="10"></span>
+          <md-input-container flex="30">
+            <md-select aria-label="Válassz{{$index}}" ng-model="vm.rating[0][$index]">
+              <md-option value="1">1 - Egyáltalán nem jellemző</md-option>
+              <md-option value="2">2 - Nem jellemző</md-option>
+              <md-option value="3">3 - Közepesen</md-option>
+              <md-option value="4">4 - Nagyjából jellemző</md-option>
+              <md-option value="5">5 - Teljes mértékben jellemző</md-option>
+            </md-select>
+          </md-input-container>
+        </div>
+      </div>
+    </div>
+  </md-content>
+  <!-- FOR STATS -->
+
+  <md-button ng-hide="vm.q>24" ng-disabled="!vm.rating" class="md-fab md-accent md-hue-2" aria-label="Start Survey" ng-click="vm.next();">
+    <md-icon class="material-icons">navigate_next</md-icon>
+  </md-button>
+</div>
