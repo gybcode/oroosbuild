@@ -1,4 +1,10 @@
-<div flex layout-fill layout-align="center center" layout="column">
+<div flex="" layout-fill="" layout-align="center center" layout="column" ng-show="vm.q==25">
+  <h1><span md-colors="{color:'accent-500'}">Köszönjük, hogy válaszolt kérdéseinkre!</h1>
+   <md-button class="md-fab md-accent md-hue-2" aria-label="Start Survey" ng-click="vm.st()">
+    <md-icon class="material-icons">refresh</md-icon>
+  </md-button>
+</div>
+<div flex layout-fill layout-align="center center" layout="column" ng-show="vm.q<25">
   <h1><span md-colors="{color:'accent-500'}">{{vm.questions[vm.q-1].title}}</span><span class="grey"> kérdés</span></h1>
   <div style="max-width:600px;font-size:.8em;" ng-show="vm.q < 7">
     <h2> {{vm.aid[0]}} </h2>

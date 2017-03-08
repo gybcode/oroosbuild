@@ -204,7 +204,7 @@
     vm.start = start;
 
     function start(){
-      $state.go('dashboard.oroos', {"q":1})
+      $state.go('dashboard.oroos', {"q":1});
     }
 
     activate();
@@ -227,6 +227,10 @@
     vm.next = next;
     vm.subs = [];
     vm.sub = [];
+    vm.st = st;
+    function st(){
+      $state.go('dashboard.home');
+    }
     function next() {
       if(vm.q > 6){
         if(vm.rating == 5){
