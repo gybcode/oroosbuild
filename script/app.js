@@ -251,7 +251,7 @@
     vm.questions = [
       {
         title: "1",
-        left: "Úgy gondolom, hogy pontosan annyit teljesítek, amennyit elvárnak tólem",
+        left: "Úgy gondolom, hogy pontosan annyit teljesítek, amennyit elvárnak tőlem",
         right: "Úgy gondolom, hogy rendszeresen magasabb szinvonalú teljesítményt nyújtok (minőségben, eredményességben) az elvártnál"
       },
       {
